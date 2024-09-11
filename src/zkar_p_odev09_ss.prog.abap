@@ -1,0 +1,42 @@
+*&---------------------------------------------------------------------*
+*& Include          ZKAR_P_ODEV09_SS
+*&---------------------------------------------------------------------*
+
+SELECTION-SCREEN BEGIN OF BLOCK b1 WITH FRAME TITLE TEXT-001.
+SELECTION-SCREEN SKIP 1.
+SELECTION-SCREEN PUSHBUTTON 40(40) but1  USER-COMMAND excel .
+
+SELECTION-SCREEN BEGIN OF BLOCK b2 WITH FRAME TITLE TEXT-002.
+PARAMETERS:
+  p_r1 RADIOBUTTON GROUP g1 DEFAULT 'X' USER-COMMAND usr1,
+  p_r2 RADIOBUTTON GROUP g1,
+  p_r3 RADIOBUTTON GROUP g1.
+SELECTION-SCREEN END OF BLOCK b2.
+SKIP 1.
+
+SELECTION-SCREEN BEGIN OF BLOCK b3 WITH FRAME TITLE TEXT-003.
+PARAMETERS: ps_parm TYPE bschl AS LISTBOX VISIBLE LENGTH 10 MODIF ID gr2.
+
+SELECTION-SCREEN END OF BLOCK b3.
+
+SELECTION-SCREEN BEGIN OF BLOCK b4 WITH FRAME TITLE  TEXT-004.
+
+PARAMETERS:
+
+  p_bukrs TYPE acdoca-rbukrs MODIF ID gr2,
+  p_waers TYPE bkpf-waers MODIF ID gr2,
+  p_kursf TYPE bkpf-kursf MODIF ID gr2,
+  p_blart TYPE acdoca-blart MODIF ID gr2,
+  p_budat TYPE acdoca-budat MODIF ID gr2,
+  p_bldat TYPE acdoca-bldat MODIF ID gr2,
+  p_sgtxt TYPE acdoca-sgtxt MODIF ID gr2,
+  p_xblnr TYPE bkpf-xblnr MODIF ID gr2.
+SELECTION-SCREEN END OF BLOCK b4.
+
+SELECTION-SCREEN BEGIN OF BLOCK b5 WITH FRAME TITLE TEXT-005.
+*    PARAMETERS: p_file TYPE rlgrap-filename.
+PARAMETERS: p_file TYPE rlgrap-filename MODIF ID gr1.
+
+SELECTION-SCREEN END OF BLOCK b5.
+
+SELECTION-SCREEN END OF BLOCK b1.
