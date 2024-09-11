@@ -1,0 +1,54 @@
+
+REPORT zkar_p_odev08.
+
+START-OF-SELECTION.
+  DATA(gc_sinav) = NEW zkar_cl_odev8( ).
+
+  CALL SCREEN 0100.
+
+MODULE status_0100 OUTPUT.
+  SET PF-STATUS '0100'.
+* SET TITLEBAR 'xxx'.
+ENDMODULE.
+MODULE user_command_0100 INPUT.
+  CASE sy-ucomm.
+    WHEN '&BACK'.
+      LEAVE TO SCREEN 0.
+  ENDCASE.
+ENDMODULE.
+
+MODULE status_0200 OUTPUT.
+  SET PF-STATUS '0200'.
+* SET TITLEBAR 'xxx'.
+ENDMODULE.
+
+
+MODULE user_command_0200 INPUT.
+  CASE sy-ucomm.
+    WHEN '&BACK'.
+      LEAVE TO SCREEN 0.
+
+  ENDCASE.
+
+ENDMODULE.
+
+MODULE user_command_0300 INPUT.
+  CASE sy-ucomm.
+    WHEN '&BACK'.
+      LEAVE TO SCREEN 0.
+
+  ENDCASE.
+ENDMODULE.
+
+MODULE status_0400 OUTPUT.
+  SET PF-STATUS '0400'.
+* SET TITLEBAR 'xxx'.
+ENDMODULE.
+
+MODULE user_command_0400 INPUT.
+  CASE sy-ucomm.
+    WHEN '&BACK'.
+      LEAVE TO SCREEN 0.
+
+  ENDCASE.
+ENDMODULE.
