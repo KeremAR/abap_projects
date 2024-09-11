@@ -1,2 +1,1 @@
-# abapdeneme
-abapdeneme
+# Internship ABAP Projects.
