@@ -196,20 +196,17 @@ This repository contains various ABAP projects demonstrating different concepts 
 
 ## Database Operations
 1. Data Declarations
-abap
-Kopyala
-Düzenle
+```
 DATA:
   gt_struc TYPE TABLE OF zkar_odev5_s01,  " Internal table to store multiple records
   gs_struc TYPE zkar_odev5_s01.           " Work area to store a single record
 gt_struc is declared as an internal table that will hold multiple entries of type zkar_odev5_s01.
 gs_struc is declared as a work area to hold a single entry of type zkar_odev5_s01.
+```
 2. SELECT Statement
 The SELECT statement retrieves data from multiple tables (T001, T012, BNKA, T012K, SKAT, T012T) with INNER and LEFT JOINs.
 
-abap
-Kopyala
-Düzenle
+
 SELECT
     t001~bukrs,    " Company Code from table T001
     t001~butxt,    " Company Name from table T001
