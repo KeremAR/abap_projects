@@ -14,139 +14,187 @@ This repository contains various ABAP projects demonstrating different concepts 
 
 ## Common T-Codes
 
-In SAP, Transaction Codes (T-Codes) are shortcuts to access various functionalities. Below is a list of commonly used T-Codes in this project, along with brief descriptions and instructions on how to use them.
-
 ### SE38 - ABAP Editor
+- Purpose: Create and edit ABAP programs
+- Steps:
+  1. Enter program name (must start with Z or Y for custom programs)
+  2. Click "Create" for new program
+  3. Select program type (Executable)
+  4. Enter title
+  5. Choose package (ZKAR)
+  6. Choose request (Kerem Ar Abap Request)
+  7. Use "Direct Processing" for immediate activatio
 
-**Purpose:** Develop, edit, and execute ABAP programs.
-
-**How to Use:**
-
-1. **Access:** Enter `SE38` in the SAP command field and press Enter.
-2. **Program Name:** In the "Program" field, enter the name of the program you wish to create or edit.
-3. **Actions:**
-   - To create a new program, click on the "Create" button.
-   - To edit an existing program, enter its name and click on "Change."
-   - To execute a program, enter its name and click on "Execute" (F8).
-
-### SM12 - Display and Delete Lock Entries
-
-**Purpose:** Monitor and manage lock entries in the system to prevent data inconsistencies.
-
-**How to Use:**
-
-1. **Access:** Enter `SM12` in the SAP command field and press Enter.
-2. **Selection Criteria:** Specify the user name or other criteria to filter lock entries.
-3. **Display:** Click on the "List" button to view the current lock entries.
-4. **Delete:** Select any unnecessary lock entries and click on the "Delete" button to remove them.
+### SM12 - Lock Management
+- Purpose: Manage system locks
+- Steps:
+  1. View List (f8)
+  2. Select entries to delete
+  3. Use Delete button(trash icon) to remove locks
 
 ### SE11 - ABAP Dictionary
+- Purpose: Create/modify database objects
+- Common Tasks:
+  1. **Create Domain:**
+     - Select "Domain"
+     - Enter name (starts with Z* or Y* ends with "do")
+     - Add description
+     - Define data type (char, int4, dats) and length
+     - Add value range if needed.(Fixed column for values, and description column)
+  
+  2. **Create Data Element:**
+     - Select "Data Element"
+     - Enter name
+     - Add description
+     - Link to domain or define type
+     - Fill field labels(description on different lengths)
+  
+  3. **Create Table:**
+     - Select "Database Table"
+     - Enter name
+     - Add description
+     - Delivery class : A (Application table)
+     - Table View Editing : Allowed
+     - Add data elements and their field names(should be short)
+     - Adding MANDT with checked key and index checkboxes is mandatory
+     - Both checkboxes of the table key must be checked
+    (Currency error fix: T001-WAERS)
+       
+    
+  4. **Create Search Help:**
+     -Select "Search Help"
+     -Enter name
+     -Select elementary search help
+     -Add description
+     -Add the table where you will get help in "Selection method"
+     -Add data elements from that table and check both checkboxes(in most cases)
+     
+     
 
-**Purpose:** Define and manage database objects like tables, views, data elements, and domains.
-
-**How to Use:**
-
-1. **Access:** Enter `SE11` in the SAP command field and press Enter.
-2. **Object Selection:** Choose the type of object you want to work with (e.g., Table, View, Data Element).
-3. **Object Name:** Enter the name of the object and click on "Create" or "Display" as needed.
-4. **Definition:** For tables, define fields, data types, and keys. For data elements, assign domains and field labels.
-5. **Activation:** After defining the object, click on the "Activate" button to implement it in the database.
-
-### SE16/SE16N - Data Browser
-
-**Purpose:** View and analyze table data directly from the database.
-
-**How to Use:**
-
-1. **Access:** Enter `SE16` or `SE16N` in the SAP command field and press Enter.
-2. **Table Name:** Enter the name of the table you wish to view and press Enter.
-3. **Selection Criteria:** Specify any selection criteria to filter the data.
-4. **Execute:** Click on the "Execute" button (F8) to display the table contents.
+### SE16/SE16N - General Table Display
+- Purpose: View database table contents and structure
+- Features:
+  - Set filters using "Selection Criteria"
+  - Export data to local file
+  - View table structure
+- Steps:
+  1. Enter table name
+  2. Click "Execute" or press F8
+ 
+### SE16 - Data Browser
+- Purpose: View database table contents and add new entries
+- Features:
+  - Create Entries
+  - View table contents
+- Steps:
+  1. Enter table name
+  2. Click "Create Entries" button on top left
+  3. Click "New Entries" button on top left
 
 ### SE24 - Class Builder
+- Purpose: Create and modify ABAP Objects
+- Steps:
+  1. Enter class name (ZCL_* or YCL_*)
+  2. Add description
+  3. Choose package (ZKAR)
+  4. Choose request (Kerem Ar Abap Request)
+ 
+- Will be continued...
 
-**Purpose:** Create and manage global classes and interfaces in ABAP's Object-Oriented programming environment.
+### SOST - SAPconnect Send Orders
+- Purpose: Monitor email sending status
+- Features:
+  - View sent emails
+  - Check failed deliveries
+  - Resend failed messages
+- Steps:
+  1. Enter "0" on Maximum No. of Hits
+  2. Select row and click display document(glasses icon)
 
-**How to Use:**
+### SmartForms
+- Purpose: Create print forms
+- Steps:
+  1. Create form:
+     - Enter name (Z* or Y*)
+     - Define form attributes
+  2. Design layout:
+     - Add windows
+     - Insert text elements
+     - Define tables
+  3. Activate and test
 
-1. **Access:** Enter `SE24` in the SAP command field and press Enter.
-2. **Class/Interface Name:** Enter the name of the class or interface and click on "Create" or "Change."
-3. **Definition:** Define attributes, methods, and events for the class or interface.
-4. **Implementation:** Implement the methods as needed.
-5. **Activation:** After completing the definitions and implementations, click on the "Activate" button.
-
-### SOST - SAPconnect Send Requests
-
-**Purpose:** Monitor and manage outbound emails and other communications sent from the SAP system.
-
-**How to Use:**
-
-1. **Access:** Enter `SOST` in the SAP command field and press Enter.
-2. **Selection Criteria:** Specify criteria such as date range or recipient to filter the send requests.
-3. **Display:** Click on the "Execute" button (F8) to view the list of send requests.
-4. **Actions:** You can view the status, retry sending, or delete send requests as needed.
-
-### SMARTFORMS - SAP Smart Forms
-
-**Purpose:** Create and maintain forms for mass printing in SAP, offering an alternative to SAPscript.
-
-**How to Use:**
-
-1. **Access:** Enter `SMARTFORMS` in the SAP command field and press Enter.
-2. **Form Name:** Enter the name of the form and click on "Create" or "Change."
-3. **Form Builder:** Use the Form Builder to design the layout, define pages, windows, and elements.
-4. **Activation:** After designing the form, click on the "Activate" button to generate the function module associated with the form.
-
-### SMW0 - SAP Web Repository
-
-**Purpose:** Manage and store web objects like images, stylesheets, and HTML files within the SAP system.
-
-**How to Use:**
-
-1. **Access:** Enter `SMW0` in the SAP command field and press Enter.
-2. **Object Type:** Choose the type of object you want to manage (e.g., MIME Objects).
-3. **Repository Browser:** Use the browser to upload, download, or manage web objects.
-
-### ZABAPGIT - ABAP Git Client
-
-**Purpose:** Integrate ABAP development with Git repositories for version control.
-
-**How to Use:**
-
-1. **Access:** Enter `ZABAPGIT` in the SAP command field and press Enter.
-2. **Repository Management:** Use the interface to link your ABAP development to a Git repository.
-3. **Actions:** Perform actions like pull, push, commit, and branch management directly from the ABAP environment.
+### SMW0 - MIME Repository
+- Purpose: Manage MIME objects
+- Common Uses:
+  - Store images
+  - Upload files
+  - Manage web content
+- Steps:
+  1. Create/select folder
+  2. Upload objects
+  3. Set permissions
 
 ### SE37 - Function Builder
+- Purpose: Create/modify function modules
+- Steps:
+  1. Enter function name (Z* or Y*)
+  2. Define:
+     - Import parameters
+     - Export parameters
+     - Tables
+     - Exceptions
+  3. Implement logic
+  4. Test function
 
-**Purpose:** Create and manage function modules, which are reusable procedures in ABAP.
+### SM30 - Table Maintenance Generator
+- Purpose: Create maintenance views
+- Steps:
+  1. Enter table name
+  2. Generate maintenance view
+  3. Define:
+     - Fields to display
+     - Authorization groups
+     - Screen layout
+  4. Activate view
 
-**How to Use:**
+### SNRO - Number Range Objects
+- Purpose: Manage number ranges
+- Steps:
+  1. Create number range object:
+     - Enter object name
+     - Define intervals
+     - Set number range
+  2. Maintain intervals:
+     - Start/end numbers
+     - Current number
+     - External/internal
 
-1. **Access:** Enter `SE37` in the SAP command field and press Enter.
-2. **Function Module Name:** Enter the name of the function module and click on "Create" or "Change."
-3. **Definition:** Define importing, exporting, and changing parameters, along with exceptions.
-4. **Source Code:** Write the ABAP code for the function module.
-5. **Activation:** After completing the definition and coding, click on the "Activate" button.
+### SE93 - Transaction Code Maintenance
+- Purpose: Create/modify transaction codes
+- Steps:
+  1. Enter transaction code (Z* or Y*)
+  2. Define:
+     - Program name
+     - Screen number
+     - Transaction type
+  3. Set authorization group
+  4. Save and generate
 
-### SM30 - Table View Maintenance
+### ZABAPGIT - Git Integration
+- Purpose: Version control for ABAP objects
+- Features:
+  - Repository management
+  - Object versioning
+  - Code sharing
+- Steps:
+  1. Install ZABAPGIT
+  2. Create/clone repository
+  3. Stage changes
+  4. Commit and push
 
-**Purpose:** Maintain entries in custom or standard table views.
-
-**How to Use:**
-
-1. **Access:** Enter `SM30` in the SAP command field and press Enter.
-2. **View/Table Name:** Enter the name of the view or table and click on "Maintain."
-3. **Data Maintenance:** Add, change, or delete entries as needed.
-4. **Save:** After making changes, click on the "Save" button to commit them.
-
-### ZMFP01 - Custom Transaction Code
-
-**Purpose:** Execute a specific custom program or report.
-
-**How to Use:**
-
-1. **Access:** Enter `ZMFP01` in the SAP command field and press Enter.
-2. **Program Execution:** The custom program associated with this
-::contentReference[oaicite:0]{index=0}
- 
+### Additional Tips:
+- Use F1 help for detailed documentation
+- Check authorization before creating objects
+- Follow naming conventions (Z* or Y* for custom objects)
+- Always activate objects after modification
+- Use transaction variants for frequently used settings
