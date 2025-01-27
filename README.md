@@ -220,7 +220,7 @@ SELECT
     skat~txt50     " Description from table SKAT
 ```
 This part selects specific fields from each table (e.g., bukrs, butxt, banka, etc.).
-The ~ symbol is used to reference fields in specific tables.
+The \~ symbol is used to reference fields in specific tables.
 3. INNER JOINs
 ```
 INNER JOIN t012 ON t012~bukrs = t001~bukrs
@@ -258,8 +258,8 @@ WHERE t001~bukrs  EQ @p_bukrs    " Filter by Company Code
   AND t012k~waers IN @s_waers.   " Filter by Currency (Selection option)
 ```
 This WHERE clause applies several filters:
-t001~bukrs must match the value in p_bukrs (a parameter).
-t012~hbkid must be one of the values in s_hbkid (a selection option).
-t012k~waers must be one of the values in s_waers (another selection option).
+t001\~bukrs must match the value in p_bukrs (a parameter).
+t012\~hbkid must be one of the values in s_hbkid (a selection option).
+t012k\~waers must be one of the values in s_waers (another selection option).
 
       
