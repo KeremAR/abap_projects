@@ -17,20 +17,20 @@ This repository contains various ABAP projects demonstrating different concepts 
 ### SE38 - ABAP Editor
 - Purpose: Create and edit ABAP programs
 - Steps:
-  1. Enter program name (must start with Z or Y for custom programs)
-  2. Click "Create" for new program
-  3. Select program type (Executable)
-  4. Enter title
-  5. Choose package (ZKAR)
-  6. Choose request (Kerem Ar Abap Request)
-  7. Use "Direct Processing" for immediate activatio
+  - Enter program name (must start with Z or Y for custom programs)
+  - Click "Create" for new program
+  - Select program type (Executable)
+  - Enter title
+  - Choose package (ZKAR)
+  - Choose request (Kerem Ar Abap Request)
+  - Use "Direct Processing" for immediate activatio
 
 ### SM12 - Lock Management
 - Purpose: Manage system locks
 - Steps:
-  1. View List (f8)
-  2. Select entries to delete
-  3. Use Delete button(trash icon) to remove locks
+  - View List (f8)
+  - Select entries to delete
+  - Use Delete button(trash icon) to remove locks
 
 ### SE11 - ABAP Dictionary
 - Purpose: Create/modify database objects
@@ -78,8 +78,8 @@ This repository contains various ABAP projects demonstrating different concepts 
   - Export data to local file
   - View table structure
 - Steps:
-  1. Enter table name
-  2. Click "Execute" or press F8
+  - Enter table name
+- Click "Execute" or press F8
  
 ### SE16 - Data Browser
 - Purpose: View database table contents and add new entries
@@ -87,17 +87,17 @@ This repository contains various ABAP projects demonstrating different concepts 
   - Create Entries
   - View table contents
 - Steps:
-  1. Enter table name
-  2. Click "Create Entries" button on top left
-  3. Click "New Entries" button on top left
+  - Enter table name
+  - Click "Create Entries" button on top left
+  - Click "New Entries" button on top left
 
 ### SE24 - Class Builder
 - Purpose: Create and modify ABAP Objects
 - Steps:
-  1. Enter class name (ZCL_* or YCL_*)
-  2. Add description
-  3. Choose package (ZKAR)
-  4. Choose request (Kerem Ar Abap Request)
+  - Enter class name (ZCL_* or YCL_*)
+  - Add description
+  - Choose package (ZKAR)
+  - Choose request (Kerem Ar Abap Request)
  
 - Will be continued...
 
@@ -108,31 +108,26 @@ This repository contains various ABAP projects demonstrating different concepts 
   - Check failed deliveries
   - Resend failed messages
 - Steps:
-  1. Enter "0" on Maximum No. of Hits
-  2. Select row and click display document(glasses icon)
+  - Enter "0" on Maximum No. of Hits
+  - Select row and click display document(glasses icon)
 
 ### SmartForms
 - Purpose: Create print forms
 - Steps:
   1. Create form:
      - Enter name (Z* or Y*)
-     - Define form attributes
-  2. Design layout:
+     - Form interface and global definitions will be continued...
+  2. Form Painter:(add video link)
      - Add windows
      - Insert text elements
-     - Define tables
-  3. Activate and test
+     - Define tables 
 
-### SMW0 - MIME Repository
-- Purpose: Manage MIME objects
-- Common Uses:
-  - Store images
-  - Upload files
-  - Manage web content
+### SMW0 - SAP Web Repository
+- Purpose: Manage and store web objects like images, stylesheets, and HTML files within the SAP system.
 - Steps:
-  1. Create/select folder
-  2. Upload objects
-  3. Set permissions
+  -Select binary data for excel template
+  -Enter your package(ZKAR)
+  -Click create(f5) on top left
 
 ### SE37 - Function Builder
 - Purpose: Create/modify function modules
@@ -146,7 +141,7 @@ This repository contains various ABAP projects demonstrating different concepts 
   3. Implement logic
   4. Test function
 
-### SM30 - Table Maintenance Generator
+### SM30 - Table Maintenance Generator(video link)
 - Purpose: Create maintenance views
 - Steps:
   1. Enter table name
@@ -157,7 +152,7 @@ This repository contains various ABAP projects demonstrating different concepts 
      - Screen layout
   4. Activate view
 
-### SNRO - Number Range Objects
+### SNRO - Number Range Objects(video link)
 - Purpose: Manage number ranges
 - Steps:
   1. Create number range object:
@@ -169,7 +164,7 @@ This repository contains various ABAP projects demonstrating different concepts 
      - Current number
      - External/internal
 
-### SE93 - Transaction Code Maintenance
+### SE93 - Transaction Code Maintenance(video)
 - Purpose: Create/modify transaction codes
 - Steps:
   1. Enter transaction code (Z* or Y*)
@@ -180,7 +175,7 @@ This repository contains various ABAP projects demonstrating different concepts 
   3. Set authorization group
   4. Save and generate
 
-### ZABAPGIT - Git Integration
+### ZABAPGIT - Git Integration(video)
 - Purpose: Version control for ABAP objects
 - Features:
   - Repository management
