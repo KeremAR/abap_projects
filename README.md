@@ -200,13 +200,14 @@ This repository contains various ABAP projects demonstrating different concepts 
 DATA:
   gt_struc TYPE TABLE OF zkar_odev5_s01,  " Internal table to store multiple records
   gs_struc TYPE zkar_odev5_s01.           " Work area to store a single record
+```
 gt_struc is declared as an internal table that will hold multiple entries of type zkar_odev5_s01.
 gs_struc is declared as a work area to hold a single entry of type zkar_odev5_s01.
-```
+
 2. SELECT Statement
 The SELECT statement retrieves data from multiple tables (T001, T012, BNKA, T012K, SKAT, T012T) with INNER and LEFT JOINs.
 
-
+```
 SELECT
     t001~bukrs,    " Company Code from table T001
     t001~butxt,    " Company Name from table T001
@@ -217,25 +218,23 @@ SELECT
     t012k~waers,   " Currency from table T012K
     t012k~hkont,   " Account from table T012K
     skat~txt50     " Description from table SKAT
+```
 This part selects specific fields from each table (e.g., bukrs, butxt, banka, etc.).
 The ~ symbol is used to reference fields in specific tables.
 3. INNER JOINs
-abap
-Kopyala
-Düzenle
+```
 INNER JOIN t012 ON t012~bukrs = t001~bukrs
 INNER JOIN bnka ON bnka~banks = t012~banks AND
                    bnka~bankl = t012~bankl
 INNER JOIN t012k ON t012k~bukrs = t012~bukrs AND
                      t012k~hbkid = t012~hbkid
+```
 These INNER JOINs combine records from different tables based on matching fields:
 T001 and T012 are joined on bukrs.
 T012 and BNKA are joined on banks and bankl.
 T012 and T012K are joined on bukrs and hbkid.
 4. LEFT JOINs
-abap
-Kopyala
-Düzenle
+```
 LEFT JOIN skat ON skat~spras = 'TR' AND
                    skat~ktopl = t001~ktopl AND
                    skat~saknr = t012k~hkont
@@ -243,22 +242,21 @@ LEFT JOIN t012t ON t012t~bukrs = t012k~bukrs AND
                    t012t~hbkid = t012k~hbkid AND
                    t012t~hktid = t012k~hktid AND
                    t012t~spras = 'TR'
+```
 LEFT JOIN ensures that even if there's no match, the result will still include the row from the left table:
 SKAT is joined with T001 and T012K based on spras, ktopl, and saknr.
 T012T is joined on bukrs, hbkid, hktid, and spras.
 5. INTO CORRESPONDING FIELDS OF TABLE
-abap
-Kopyala
-Düzenle
+```
 INTO CORRESPONDING FIELDS OF TABLE @gt_struc
+```
 This part inserts the data retrieved from the SELECT statement into the internal table gt_struc. The CORRESPONDING FIELDS ensures that the selected fields are mapped to the corresponding fields of the internal table gt_struc.
 6. WHERE Clause with Filter Conditions
-abap
-Kopyala
-Düzenle
+```
 WHERE t001~bukrs  EQ @p_bukrs    " Filter by Company Code
   AND t012~hbkid  IN @s_hbkid    " Filter by Bank ID (Selection option)
   AND t012k~waers IN @s_waers.   " Filter by Currency (Selection option)
+```
 This WHERE clause applies several filters:
 t001~bukrs must match the value in p_bukrs (a parameter).
 t012~hbkid must be one of the values in s_hbkid (a selection option).
