@@ -262,4 +262,86 @@ t001\~bukrs must match the value in p_bukrs (a parameter).
 t012\~hbkid must be one of the values in s_hbkid (a selection option).
 t012k\~waers must be one of the values in s_waers (another selection option).
 
+## Email Integration
+
+### Basic Email Setup and Sending
+
+1. **Required Data Declarations**
+```
+" Email related data structures
+TYPES: BEGIN OF zemail_structure,
+name_text TYPE adrp-name_text,
+smtp_addr TYPE adr6-smtp_addr,
+END OF zemail_structure.
+DATA: it_email TYPE TABLE OF zemail_structure,
+rv_email TYPE zemail_structure,
+lv_recipient TYPE string.
+```
+2. **Getting Email Recipients from Database**
+```
+" Select users who are marked for email receipt
+SELECT zusername
+FROM zkar_mail_odev06
+INTO TABLE @DATA(selected_users)
+WHERE checkbox = 'X'.
+" Get email addresses for selected users
+SELECT SINGLE adrp~name_text, adr6~smtp_addr
+FROM usr21
+LEFT JOIN adr6
+ON usr21~addrnumber = adr6~addrnumber
+AND usr21~persnumber = adr6~persnumber
+LEFT JOIN adrp
+ON usr21~persnumber = adrp~persnumber
+AND adrp~date_from = @mc_date_from
+AND adrp~nation = ''
+WHERE usr21~bname = @selected_user-zusername
+AND adr6~smtp_addr IS NOT INITIAL
+INTO @rv_email.
+```
+3. **Sending Email with Attachment**
+```
+" Create mail object
+DATA: lo_mail TYPE REF TO cl_mail.
+CREATE OBJECT lo_mail.
+" Send email with attachment
+lo_mail->send_email(
+EXPORTING
+iv_subject = 'TCMB Kur Bilgileri' " Email subject
+iv_body = 'TCMB günlük kur bilgileri ektedir.' " Email body
+iv_recipient = lv_recipient " Recipient email address
+).
+" Check if email was sent successfully
+IF sy-subrc IS INITIAL.
+MESSAGE 'Message sent' TYPE 'S'.
+ELSE.
+MESSAGE 'Mesaj gönderilemedi.' TYPE 'E'.
+ENDIF.
+```
+4. **Adding Excel Attachment to Email**
+```
+" Create ALV object for Excel
+DATA: salv_table TYPE REF TO cl_salv_table.
+TRY.
+" Create ALV instance
+cl_salv_table=>factory(
+IMPORTING
+r_salv_table = table
+CHANGING
+t_table = gt_list ).
+" Prepare email subject with date
+DATA: lv_subject TYPE bcs_filename.
+lv_subject = |{ p_tarih } Günü Kur Bilgisi.xlsx|.
+" Convert table to XML (Excel format)
+DATA: v_xstring TYPE xstring.
+v_xstring = table->to_xml( if_salv_bs_xml=>c_type_xlsx ).
+" Add attachment to email
+msg->add_attachment(
+EXPORTING
+iv_doctype = 'EXT'
+iv_filename = lv_subject
+iv_contents_bin = v_xstring ).
+CATCH cx_salv_msg.
+" Handle exceptions
+ENDTRY.
+```
       
