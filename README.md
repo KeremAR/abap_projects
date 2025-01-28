@@ -62,12 +62,12 @@ This repository contains various ABAP projects demonstrating different concepts 
        
     
   4. **Create Search Help:**
-     -Select "Search Help"
-     -Enter name
-     -Select elementary search help
-     -Add description
-     -Add the table where you will get help in "Selection method"
-     -Add data elements from that table and check both checkboxes(in most cases)
+     - Select "Search Help"
+     - Enter name
+     - Select elementary search help
+     - Add description
+     - Add the table where you will get help in "Selection method"
+     - Add data elements from that table and check both checkboxes(in most cases)
      
      
 
@@ -125,9 +125,9 @@ This repository contains various ABAP projects demonstrating different concepts 
 ### SMW0 - SAP Web Repository
 - Purpose: Manage and store web objects like images, stylesheets, and HTML files within the SAP system.
 - Steps:
-  -Select binary data for excel template
-  -Enter your package(ZKAR)
-  -Click create(f5) on top left
+  - Select binary data for excel template
+  - Enter your package(ZKAR)
+  - Click create(f5) on top left
 
 ### SE37 - Function Builder
 - Purpose: Create/modify function modules
