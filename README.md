@@ -344,4 +344,137 @@ CATCH cx_salv_msg.
 " Handle exceptions
 ENDTRY.
 ```
-      
+
+## OO ALV Implementation
+
+1. Basic Data Declarations
+
+```
+DATA:
+go_alv TYPE REF TO cl_gui_alv_grid,
+go_cont TYPE REF TO cl_gui_custom_container,
+gt_fieldcat TYPE lvc_t_fcat,
+gs_fieldcat TYPE lvc_s_fcat,
+gs_layout TYPE lvc_s_layo.
+```
+go_alv is the ALV Grid object that will display our data.
+go_cont is the container object that will hold our ALV Grid.
+gt_fieldcat is an internal table that will store our field catalog settings.
+gs_fieldcat is a structure for individual field catalog entries.
+gs_layout stores the layout settings for our ALV Grid.
+
+2. Class Definition
+```
+CLASS lcl_main DEFINITION.
+PUBLIC SECTION.
+CLASS-DATA: app TYPE REF TO lcl_main.
+CLASS-METHODS:
+app_instance RETURNING VALUE(go_main) TYPE REF TO lcl_main,
+initialization,
+at_selection_screen_output,
+at_selection_screen.
+METHODS:
+get_data,
+display_alv,
+set_layout,
+set_fieldcat.
+ENDCLASS.
+```
+
+app_instance is a factory method that returns a single instance of the class.
+get_data handles data retrieval from the database.
+display_alv manages the creation and display of the ALV grid.
+set_layout defines how the ALV grid should look.
+set_fieldcat defines the structure of the ALV columns.
+
+3. ALV Display Implementation
+```
+METHOD display_alv.
+IF go_cont IS INITIAL.
+CREATE OBJECT go_cont
+EXPORTING
+container_name = 'CC_ALV'.
+CREATE OBJECT go_alv
+EXPORTING
+i_parent = go_cont.
+SET HANDLER me->handle_double_click FOR go_alv.
+CALL METHOD go_alv->set_table_for_first_display
+EXPORTING
+is_layout = gs_layout
+CHANGING
+it_outtab = gt_data
+it_fieldcatalog = gt_fieldcat.
+ELSE.
+go_alv->refresh_table_display( ).
+ENDIF.
+ENDMETHOD.
+```
+
+This method first checks if the container exists.
+If not, it creates a new container and ALV grid.
+Sets up event handling for double clicks.
+Displays the data using set_table_for_first_display.
+If container exists, just refreshes the display.
+
+4. Field Catalog Setup
+```
+METHOD set_fieldcat.
+CLEAR: gs_fieldcat, gt_fieldcat.
+gs_fieldcat-fieldname = 'RBUKRS'.
+gs_fieldcat-reptext = 'Şirket Kodu'.
+gs_fieldcat-scrtext_s = 'Şirket Kodu'.
+gs_fieldcat-scrtext_m = 'Şirket Kodu'.
+APPEND gs_fieldcat TO gt_fieldcat.
+```
+
+fieldname specifies which field from the data table to display.
+reptext sets the column header text.
+scrtext_s and scrtext_m set short and medium column titles.
+Each field configuration is appended to the field catalog table.
+
+5. Layout Settings
+```
+METHOD set_layout.
+gs_layout-cwidth_opt = abap_true.
+gs_layout-zebra = abap_true.
+gs_layout-sel_mode = 'A'.
+gs_layout-grid_title = 'Your Title'.
+ENDMETHOD.
+```
+
+cwidth_opt optimizes column widths automatically.
+zebra creates alternating row colors for better readability.
+sel_mode 'A' allows row selection.
+grid_title sets the title of the ALV grid.
+
+6. Program Flow
+```
+INITIALIZATION.
+lcl_main=>initialization( ).
+START-OF-SELECTION.
+DATA(go_main) = lcl_main=>app_instance( ).
+go_main->get_data( ).
+go_main->set_fieldcat( ).
+go_main->set_layout( ).
+go_main->display_alv( ).
+```
+
+Program starts with initialization.
+Creates instance of main class.
+Retrieves data and sets up ALV configuration.
+Finally displays the ALV grid.
+
+7. Common Field Catalog Properties
+```
+gs_fieldcat-fieldname = 'FIELD1'. " Database field name
+gs_fieldcat-ref_table = 'TABLENAME'. " Reference table
+gs_fieldcat-key = abap_true. " Mark as key field
+gs_fieldcat-hotspot = abap_true. " Make field clickable
+gs_fieldcat-no_out = abap_false. " Show/hide field
+gs_fieldcat-emphasize = 'C310'. " Color settings
+```
+These properties control how each column appears and behaves in the ALV grid.
+ref_table links the field to a database table.
+hotspot makes fields clickable for additional functionality.
+emphasize allows color coding of specific columns.
+
