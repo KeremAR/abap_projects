@@ -366,13 +366,16 @@ gs_layout stores the layout settings for our ALV Grid.
 2. Class Definition
 ```
 CLASS lcl_main DEFINITION.
+
 PUBLIC SECTION.
 CLASS-DATA: app TYPE REF TO lcl_main.
+
 CLASS-METHODS:
 app_instance RETURNING VALUE(go_main) TYPE REF TO lcl_main,
 initialization,
 at_selection_screen_output,
 at_selection_screen.
+
 METHODS:
 get_data,
 display_alv,
@@ -394,16 +397,20 @@ IF go_cont IS INITIAL.
 CREATE OBJECT go_cont
 EXPORTING
 container_name = 'CC_ALV'.
+
 CREATE OBJECT go_alv
 EXPORTING
 i_parent = go_cont.
+
 SET HANDLER me->handle_double_click FOR go_alv.
+
 CALL METHOD go_alv->set_table_for_first_display
 EXPORTING
 is_layout = gs_layout
 CHANGING
 it_outtab = gt_data
 it_fieldcatalog = gt_fieldcat.
+
 ELSE.
 go_alv->refresh_table_display( ).
 ENDIF.
@@ -420,10 +427,12 @@ If container exists, just refreshes the display.
 ```
 METHOD set_fieldcat.
 CLEAR: gs_fieldcat, gt_fieldcat.
+
 gs_fieldcat-fieldname = 'RBUKRS'.
 gs_fieldcat-reptext = 'Şirket Kodu'.
 gs_fieldcat-scrtext_s = 'Şirket Kodu'.
 gs_fieldcat-scrtext_m = 'Şirket Kodu'.
+
 APPEND gs_fieldcat TO gt_fieldcat.
 ```
 
@@ -451,8 +460,11 @@ grid_title sets the title of the ALV grid.
 ```
 INITIALIZATION.
 lcl_main=>initialization( ).
+
 START-OF-SELECTION.
+
 DATA(go_main) = lcl_main=>app_instance( ).
+
 go_main->get_data( ).
 go_main->set_fieldcat( ).
 go_main->set_layout( ).
