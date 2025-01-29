@@ -490,3 +490,79 @@ ref_table links the field to a database table.
 hotspot makes fields clickable for additional functionality.
 emphasize allows color coding of specific columns.
 
+## File Handling
+Reading Data from Excel in ABAP
+1. File Selection
+First, we prompt the user to select an Excel file from their local system.
+
+```
+DATA: lv_file_path TYPE string.
+
+" Prompt user to select the Excel file
+CALL FUNCTION 'F4_FILENAME'
+  IMPORTING
+    file_name = lv_file_path.
+```
+The variable lv_file_path stores the selected file path.
+The function module F4_FILENAME opens a file selection dialog and assigns the chosen file's path to lv_file_path.
+2. Uploading the Excel File
+Once the user selects a file, we upload its content into an internal table.
+
+```
+DATA: lt_raw_data TYPE TABLE OF x255,
+      lv_file_length TYPE i.
+
+" Upload the Excel file
+CALL FUNCTION 'GUI_UPLOAD'
+  EXPORTING
+    filename = lv_file_path
+    filetype = 'BIN'
+  IMPORTING
+    filelength = lv_file_length
+  TABLES
+    data_tab = lt_raw_data.
+```
+lt_raw_data: Internal table that holds the binary data of the uploaded file.
+GUI_UPLOAD:
+filename: Specifies the file path selected by the user.
+filetype: Defines the file type. 'BIN' means binary mode, used for Excel files.
+filelength: Returns the length of the uploaded file.
+data_tab: Stores the uploaded binary content.
+3. Converting the Binary Data to Internal Table Format
+Since the Excel file is in binary format, we need to convert it into a structured internal table.
+
+```
+DATA: lt_excel_data TYPE TABLE OF alsmex_tabline.
+
+CALL FUNCTION 'ALSM_EXCEL_TO_INTERNAL_TABLE'
+  EXPORTING
+    filename    = lv_file_path
+    i_begin_col = 1
+    i_begin_row = 1
+    i_end_col   = 256
+    i_end_row   = 65536
+  TABLES
+    intern = lt_excel_data.
+```
+lt_excel_data: Internal table that will hold the structured Excel data.
+ALSM_EXCEL_TO_INTERNAL_TABLE:
+filename: The path of the Excel file.
+i_begin_col: The starting column (set to 1).
+i_begin_row: The starting row (set to 1).
+i_end_col: The maximum number of columns to read (256).
+i_end_row: The maximum number of rows to read (65536).
+intern: Stores the structured output of the Excel data.
+4. Processing the Extracted Data
+After converting the Excel data, we loop through the internal table to process the records.
+
+```
+LOOP AT lt_excel_data INTO DATA(ls_excel_row).
+  " Read each row and process the data as needed
+  WRITE: / ls_excel_row-col, ls_excel_row-row, ls_excel_row-value.
+ENDLOOP.
+```
+The LOOP AT statement iterates over each row in lt_excel_data.
+ls_excel_row-col: Column number.
+ls_excel_row-row: Row number.
+ls_excel_row-value: The actual cell value in the Excel file.
+You can use this data to fill another internal table or perform business logic as needed.
